@@ -96,12 +96,57 @@ namespace MauiStylesDemo.ViewModels
         }
         #endregion
 
+        #region  תאריך לידה
+     
+        private bool showYearError;
+        public bool ShowYearError
+        {
+            get => showYearError;
+            set
+            {
+                showYearError = value;
+                OnPropertyChanged("ShowYearError");
+            }
+        }
+
+        private DateTime yearOfBirth;
+        public DateTime YearOfBirth
+        {
+            get => yearOfBirth;
+            set
+            {
+                yearOfBirth = value;
+                ValidateYearOfBirth();
+                OnPropertyChanged("YearOfBirth");
+            }
+        }
+
+        private string yearOfBirthError;
+        public string YearOfBirthError
+        {
+            get => yearOfBirthError;
+            set
+            {
+                yearOfBirthError = value;
+                OnPropertyChanged("YearOfBirthError");
+            }
+        }
+
+        private void ValidateYearOfBirth()
+        {
+            this.ShowYearError = !YearOfBirth.has || yearOfBirth < 2011;
+        }
+        #endregion
+
+
         public FormValidationViewModel()
         {
             this.NameError = "זהו שדה חובה";
             this.ShowNameError = false;
             this.AgeError = "הגיל חייב להיות גדול מ 13";
             this.ShowAgeError = false;
+            this.YearOfBirthError = "שנת הלידה חייבת ליהיות ";
+            this.YearOfBirthError = false;
             this.SaveDataCommand = new Command(() => SaveData());
         }
 
