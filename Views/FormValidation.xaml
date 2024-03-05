@@ -50,10 +50,19 @@
         <Entry Placeholder="הכנס גיל גדול מ 13" Text="{Binding Age}" Style="{StaticResource entryStyle}" Keyboard="Numeric"/>
 
         <!-- תאריך לידה -->
-        <Label Text="תאריך לידה" FontSize="Small" />
-        <DatePicker >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Text="תאריך לידה" FontSize="Small" />
+            <Label Text="{Binding YearOfBirthError}" IsVisible="{Binding ShowYearError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+        </Grid>
+        <DatePicker Date="{Binding YearOfBirth}" MinimumDate = "01,01,2000">
         </DatePicker>
-        <Entry Placeholder="הכנס את שנת הלידה שלך, חייבת להיות יותר מ2011" Text="{Binding Age}" Style="{StaticResource entryStyle}" Keyboard="Numeric"/>
 
         <Label Text="דואר אלקטרוני" FontSize="Small" />
         <Entry Placeholder="הכנס דואר אלקטרוני" >

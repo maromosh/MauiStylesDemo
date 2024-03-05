@@ -134,7 +134,11 @@ namespace MauiStylesDemo.ViewModels
 
         private void ValidateYearOfBirth()
         {
-            this.ShowYearError = !YearOfBirth.has || yearOfBirth < 2011;
+            DateTime today = DateTime.Today;
+            TimeSpan diff = today.Subtract(YearOfBirth);
+            double years = diff.TotalDays / 365.25;
+
+            this.ShowYearError = years <= 13;
         }
         #endregion
 
@@ -145,8 +149,8 @@ namespace MauiStylesDemo.ViewModels
             this.ShowNameError = false;
             this.AgeError = "הגיל חייב להיות גדול מ 13";
             this.ShowAgeError = false;
-            this.YearOfBirthError = "שנת הלידה חייבת ליהיות ";
-            this.YearOfBirthError = false;
+            this.YearOfBirthError = "שנת הלידה חייבת ליהיות מתחת ל 2011";
+            this.showYearError = false;
             this.SaveDataCommand = new Command(() => SaveData());
         }
 
